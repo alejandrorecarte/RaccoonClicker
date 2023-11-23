@@ -2,13 +2,13 @@ package model.Generadores;
 
 import model.Generador;
 
-public class PlacaBase extends Generador {
+public class Runas extends Generador {
 
-    private final String[] NOMBRES = {"Placa base", "Caja de plástico", "Caja de aluminio", "Caja de aluminio LED", "Caja de titanio"};
+    private final String[] NOMBRES = {"Runa básica", "Runa media", "Runa potente", "Runa nórdica", "Runa egipcia"};
     private int dineroBase = 5;
     private int precio = 500;
 
-    public PlacaBase() {
+    public Runas() {
         this.setNombre(NOMBRES[0]);
         this.setDineroBase(dineroBase);
         this.setCantidad(0);

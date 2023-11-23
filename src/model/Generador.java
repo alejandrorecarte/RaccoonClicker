@@ -1,31 +1,38 @@
 package model;
 
-public abstract class Generadores {
+public abstract class Generador {
 
-    private double dineroPorSeg;
-    private double dineroBase;
+    private String nombre;
+    private int dineroPorSeg;
+    private int dineroBase;
     private int cantidad;
+    private int precio;
 
-    public Generadores(double dineroPorSeg, double dineroBase, int cantidad) {
-        this.dineroPorSeg = dineroPorSeg;
-        this.dineroBase = dineroBase;
-        this.cantidad = cantidad;
+    public Generador() {
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public double getDineroBase() {
         return dineroBase;
     }
 
-    public void setDineroBase(double dineroBase) {
+    public void setDineroBase(int dineroBase) {
         this.dineroBase = dineroBase;
         this.dineroPorSeg = cantidad * dineroBase;
     }
 
-    public double getDineroPorSeg() {
+    public int getDineroPorSeg() {
         return dineroPorSeg;
     }
 
-    public void setDineroPorSeg(double dineroPorSeg) {
+    public void setDineroPorSeg(int dineroPorSeg) {
         this.dineroPorSeg = dineroPorSeg;
     }
 
@@ -37,4 +44,14 @@ public abstract class Generadores {
         this.cantidad = cantidad;
         this.dineroPorSeg = cantidad * dineroBase;
     }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public abstract void comprarMejora(int cantidad);
 }

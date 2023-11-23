@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CPUClicker.iml" filepath="$PROJECT_DIR$/CPUClicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RaccoonClicker.iml" filepath="$PROJECT_DIR$/RaccoonClicker.iml" />
     </modules>
   </component>
 </project>

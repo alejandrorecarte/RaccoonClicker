@@ -2,13 +2,13 @@ package model.Generadores;
 
 import model.Generador;
 
-public class Caja extends Generador {
+public class Puntero extends Generador {
 
-    private final String[] NOMBRES = {"Caja de cartón", "Caja de plástico", "Caja de aluminio", "Caja de aluminio LED", "Caja de titanio"};
+    private final String[] NOMBRES = {"Puntero", "Puntero doble", "Puntero esmeralda", "Puntero de poder", "Puntero mágico"};
     private int dineroBase = 1;
     private int precio = 25;
 
-    public Caja() {
+    public Puntero() {
         this.setNombre(NOMBRES[0]);
         this.setDineroBase(dineroBase);
         this.setCantidad(0);
