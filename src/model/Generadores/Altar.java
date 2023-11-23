@@ -2,13 +2,13 @@ package model.Generadores;
 
 import model.Generador;
 
-public class Runas extends Generador {
+public class Altar extends Generador {
 
-    private final String[] NOMBRES = {"Runa básica", "Runa media", "Runa potente", "Runa nórdica", "Runa egipcia"};
-    private int dineroBase = 5;
-    private int precio = 500;
+    private final String[] NOMBRES = {"Altar improvisado", "Altar mejorado", "Altar dorado", "Altar dedicado", "Altar arcano"};
+    private int dineroBase = 15000;
+    private int precio = 20000000;
 
-    public Runas() {
+    public Altar() {
         this.setNombre(NOMBRES[0]);
         this.setDineroBase(dineroBase);
         this.setCantidad(0);
@@ -29,5 +29,9 @@ public class Runas extends Generador {
         }else if(this.getCantidad() >= 400){
             this.setNombre(NOMBRES[4]);
         }
+    }
+
+    public String getText() {
+        return getNombre() + " | " + controller.GUIController.formatearNumero(getPrecio()) + " PM | " + getCantidad();
     }
 }

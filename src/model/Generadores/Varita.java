@@ -2,13 +2,13 @@ package model.Generadores;
 
 import model.Generador;
 
-public class Puntero extends Generador {
+public class Varita extends Generador {
 
-    private final String[] NOMBRES = {"Puntero", "Puntero doble", "Puntero esmeralda", "Puntero de poder", "Puntero mágico"};
-    private int dineroBase = 1;
-    private int precio = 25;
+    private final String[] NOMBRES = {"Varita de madera", "Varita de plástico", "Varita esmeralda", "Varita de fuego", "Varita de sauco"};
+    private int dineroBase = 50;
+    private int precio = 10000;
 
-    public Puntero() {
+    public Varita() {
         this.setNombre(NOMBRES[0]);
         this.setDineroBase(dineroBase);
         this.setCantidad(0);

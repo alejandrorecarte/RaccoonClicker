@@ -2,13 +2,12 @@ package model.Generadores;
 
 import model.Generador;
 
-public class Puntero extends Generador {
+public class TorreMago extends Generador {
+    private final String[] NOMBRES = {"Torre pequeña", "Torre media", "Torre mágica", "Torre arcana", "Torre de Sauron"};
+    private int dineroBase = 100000;
+    private int precio = 100000000;
 
-    private final String[] NOMBRES = {"Puntero", "Puntero doble", "Puntero esmeralda", "Puntero de poder", "Puntero mágico"};
-    private int dineroBase = 1;
-    private int precio = 25;
-
-    public Puntero() {
+    public TorreMago() {
         this.setNombre(NOMBRES[0]);
         this.setDineroBase(dineroBase);
         this.setCantidad(0);

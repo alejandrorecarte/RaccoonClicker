@@ -2,13 +2,12 @@ package model.Generadores;
 
 import model.Generador;
 
-public class Puntero extends Generador {
+public class Palantir extends Generador {
+    private final String[] NOMBRES = {"Palantir de cristal", "Palantir de obsidiana", "Palantir de hechicero", "Palantir universal", "Palantir de Saruman"};
+    private int dineroBase = 200;
+    private int precio = 150000;
 
-    private final String[] NOMBRES = {"Puntero", "Puntero doble", "Puntero esmeralda", "Puntero de poder", "Puntero mágico"};
-    private int dineroBase = 1;
-    private int precio = 25;
-
-    public Puntero() {
+    public Palantir() {
         this.setNombre(NOMBRES[0]);
         this.setDineroBase(dineroBase);
         this.setCantidad(0);
