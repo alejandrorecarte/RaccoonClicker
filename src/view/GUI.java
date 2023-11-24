@@ -2,6 +2,7 @@ package view;
 
 import model.Generador;
 import model.Generadores.*;
+import model.Mejora;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -20,6 +21,8 @@ public class GUI {
     protected final static Color COLOR_BOTON_HOVER = new Color(COD_BOTON_HOVER[0], COD_BOTON_HOVER[1], COD_BOTON_HOVER[2]);
 
     protected ArrayList<Generador> generadores;
+    protected ArrayList<Mejora> mejoras;
+    protected ArrayList<Mejora> mejorasComprados;
     protected JFrame f;
     protected JPanel p;
     protected JPanel p1;
@@ -27,14 +30,22 @@ public class GUI {
     protected JLabel lDinero;
     protected JLabel bMapache;
     protected JPanel pMapache;
+    protected ArrayList<JPanel> botonesGeneradores;
+    protected JPanel pGeneradores;
+    protected JScrollPane spGeneradores;
+    protected JLabel lMejoras;
+    protected JScrollPane spMejoras;
     protected ArrayList<JPanel> botonesMejoras;
-    private JPanel pMejoras;
-    protected JScrollPane scrollPane;
+    protected JLabel lGeneradores;
+    protected JPanel pMejoras;
+    protected ArrayList<JPanel> botonesMejorasComprados;
 
 
     public GUI() {
 
         generadores = new ArrayList<Generador>();
+        mejoras = new ArrayList<Mejora>();
+        mejorasComprados = new ArrayList<Mejora>();
         f = new JFrame("Raccoon Clicker");
         f.setBackground(COLOR_PRINCIPAL);
 
@@ -65,10 +76,11 @@ public class GUI {
         p1.add(pMapache, new GridBagConstraints(0,1, 1, 1,1.0,10.0, GridBagConstraints.CENTER, GridBagConstraints.CENTER,
                 new Insets(3,10,10,3), 0, 0));
 
-        botonesMejoras = new ArrayList<>();
+        botonesGeneradores = new ArrayList<>();
 
         generadores.add(new Puntero());
         generadores.add(new Runa());
+        generadores.add(new Varita());
         generadores.add(new Palantir());
         generadores.add(new Aprendiz());
         generadores.add(new Ritual());
@@ -84,11 +96,10 @@ public class GUI {
         generadores.add(new Puntero());
         generadores.add(new Puntero());
         generadores.add(new Puntero());
-        generadores.add(new Puntero());
 
-        pMejoras = new JPanel(new GridLayout(18,0));
-        pMejoras.setBackground(COLOR_PRINCIPAL);
-        pMejoras.setBorder(new LineBorder(COLOR_BOTON_HOVER,1));
+        pGeneradores = new JPanel(new GridLayout(18,0));
+        pGeneradores.setBackground(COLOR_PRINCIPAL);
+        pGeneradores.setBorder(new LineBorder(COLOR_BOTON_HOVER,1));
 
         for(int i = 0; i < generadores.size(); i++) {
             JPanel p = new JPanel();
@@ -96,24 +107,61 @@ public class GUI {
             p.add(b);
             p.setBackground(COLOR_PRINCIPAL);
             p.setBorder(new LineBorder(COLOR_BOTON_HOVER,1));
+            botonesGeneradores.add(p);
+            pGeneradores.add(botonesGeneradores.get(i));
+        }
+
+        lGeneradores = new JLabel("Generadores:");
+        lGeneradores.setFont(new Font("Arial", Font.PLAIN, 24));;
+        JScrollBar scrollBarGeneradores = new JScrollBar();
+        scrollBarGeneradores.setBackground(COLOR_BOTON_HOVER);
+        scrollBarGeneradores.setUI(new CustomScrollBarUI());
+        scrollBarGeneradores.setBorder(new LineBorder(COLOR_PRINCIPAL, 1));
+        spGeneradores = new JScrollPane(pGeneradores);
+        spGeneradores.setVerticalScrollBar(scrollBarGeneradores);
+        spGeneradores.setBorder(new LineBorder(COLOR_BOTON_HOVER, 1));
+        spGeneradores.setBackground(COLOR_BOTON);
+
+        botonesMejoras = new ArrayList<>();
+        botonesMejorasComprados = new ArrayList<>();
+
+        mejoras.add(new Mejora("Puntero ágil", 2, generadores.get(0), 500));
+        mejoras.add(new Mejora("Puntero de habilidad", 3, generadores.get(0), 1000));
+        mejoras.add(new Mejora("Runa brillante", 2, generadores.get(0), 5000));
+        mejoras.add(new Mejora("Runa poderosa", 3, generadores.get(0), 10000));
+
+        pMejoras = new JPanel(new GridLayout(4,0));
+        pMejoras.setBackground(COLOR_PRINCIPAL);
+        pMejoras.setBorder(new LineBorder(COLOR_BOTON_HOVER,1));
+
+        for(int i = 0; i < mejoras.size(); i++) {
+            JPanel p = new JPanel();
+            JLabel b = new JLabel(mejoras.get(i).getText());
+            p.add(b);
+            p.setBackground(COLOR_PRINCIPAL);
+            p.setBorder(new LineBorder(COLOR_BOTON_HOVER,1));
             botonesMejoras.add(p);
             pMejoras.add(botonesMejoras.get(i));
         }
 
-        JLabel lMejoras = new JLabel("Mejoras:");
+        lMejoras = new JLabel ("Mejoras:");
         lMejoras.setFont(new Font("Arial", Font.PLAIN, 24));;
-        scrollPane = new JScrollPane(pMejoras);
-        JScrollBar scrollBar = new JScrollBar();
-        scrollBar.setBackground(COLOR_BOTON_HOVER);
-        scrollBar.setUI(new CustomScrollBarUI());
-        scrollBar.setBorder(new LineBorder(COLOR_PRINCIPAL, 1));
-        scrollPane.setVerticalScrollBar(scrollBar);
-        scrollPane.setBorder(new LineBorder(COLOR_BOTON_HOVER, 1));
-        scrollPane.setBackground(COLOR_BOTON);
+        JScrollBar scrollBarEvoluciones = new JScrollBar();
+        scrollBarEvoluciones.setBackground(COLOR_BOTON_HOVER);
+        scrollBarEvoluciones.setUI(new CustomScrollBarUI());
+        scrollBarEvoluciones.setBorder(new LineBorder(COLOR_PRINCIPAL, 1));
+        spMejoras = new JScrollPane(pMejoras);
+        spMejoras.setBorder(new LineBorder(COLOR_PRINCIPAL, 1));
+        spMejoras.setVerticalScrollBar(scrollBarEvoluciones);
+        spMejoras.setBackground(COLOR_BOTON);
 
-        p2.add(lMejoras, new GridBagConstraints(0,0, 1, 1,1.0,1.0, GridBagConstraints.CENTER, GridBagConstraints.CENTER,
+        p2.add(lGeneradores, new GridBagConstraints(0,0, 1, 1,1.0,1.0, GridBagConstraints.CENTER, GridBagConstraints.CENTER,
                 new Insets(10,3,3,10), 0, 0));
-        p2.add(scrollPane, new GridBagConstraints(0,1, 1, 1,1.0,10.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+        p2.add(spGeneradores, new GridBagConstraints(0,1, 1, 1,1.0,3.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(3,3,3,10), 0, 0));
+        p2.add(lMejoras, new GridBagConstraints(0,2, 1, 1,1.0,1.0, GridBagConstraints.CENTER, GridBagConstraints.CENTER,
+                new Insets(3,3,3,10), 0, 0));
+        p2.add(spMejoras, new GridBagConstraints(0,3, 1, 1,1.0,3.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(3,3,10,10), 0, 0));
 
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

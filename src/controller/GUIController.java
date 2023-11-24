@@ -6,28 +6,53 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import static controller.xml.EscribirXML.escribirXML;
 
 public class GUIController extends GUI {
 
-    private long dineroTotal = 0;
+    private long dineroTotal = 50000;
     private boolean parar = false;
 
     public GUIController() {
-        for(int i = 0; i < botonesMejoras.size(); i++) {
+        for(int i = 0; i < botonesGeneradores.size(); i++) {
             int finalI = i;
-            botonesMejoras.get(i).addMouseListener(new MouseAdapter() {
+            botonesGeneradores.get(i).addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     if (generadores.get(finalI).getPrecio() <= dineroTotal) {
                         dineroTotal -= generadores.get(finalI).getPrecio();
                         generadores.get(finalI).comprarMejora(1);
-                        JLabel l = (JLabel) botonesMejoras.get(finalI).getComponents()[0];
-                                l.setText(generadores.get(finalI).getText());
+                        JLabel l = (JLabel) botonesGeneradores.get(finalI).getComponents()[0];
+                        l.setText(generadores.get(finalI).getText());
                         comprobarBotones();
                     }
                 }
             });
         }
+        for(int i = 0; i < botonesMejoras.size(); i++) {
+            int finalI = i;
+            botonesMejoras.get(i).addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    if (mejoras.get(finalI).getPrecio() <= dineroTotal) {
+                        dineroTotal -= mejoras.get(finalI).getPrecio();
+                        JLabel l = (JLabel) botonesMejoras.get(finalI).getComponents()[0];
+                        l.setText(mejoras.get(finalI).getText());
+                        mejorasComprados.add(mejoras.get(finalI));
+                        mejoras.remove(finalI);
+                        botonesMejorasComprados.add(botonesMejoras.get(finalI));
+                        botonesMejoras.remove(finalI);
+                        pMejoras.remove(finalI);
+                        pMejoras.setLayout(new GridLayout(botonesMejoras.size(), 0));
+                        comprobarBotones();
+                    }
+                }
+            });
+        }
+
 
         pMapache.addMouseListener(new MouseAdapter() {
             @Override
@@ -35,6 +60,17 @@ public class GUIController extends GUI {
                 dineroTotal += 1;
                 lDinero.setText(formatearNumero(dineroTotal) + " Puntos Mágicos");
                 cambiarDeColorMapache();
+            }
+        });
+
+        f.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    escribirXML(dineroTotal, generadores, mejorasComprados);
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -85,22 +121,54 @@ public class GUIController extends GUI {
         long dinero = 0;
         for (int i = 0; i < generadores.size(); i++) {
 
-            dinero += generadores.get(i).getDineroPorSeg();
+            long dineroGenerador = generadores.get(i).getDineroPorSeg();
+
+            for (int j = 0; j < mejorasComprados.size(); j++) {
+                if(mejorasComprados.get(j).getGenerador().equals(generadores.get(i))){
+                    dineroGenerador = dineroGenerador * mejorasComprados.get(j).getMultiplicador();
+                }
+            }
+
+            dinero += dineroGenerador;
 
             if(dineroTotal < generadores.get(i).getPrecio()) {
-                botonesMejoras.get(i).setBackground(COLOR_BOTON_HOVER);
-                JLabel l = (JLabel) botonesMejoras.get(i).getComponent(0);
+                botonesGeneradores.get(i).setBackground(COLOR_BOTON_HOVER);
+                JLabel l = (JLabel) botonesGeneradores.get(i).getComponent(0);
                 l.setForeground(Color.LIGHT_GRAY);
-                botonesMejoras.get(i).repaint();
-                botonesMejoras.get(i).revalidate();
+                botonesGeneradores.get(i).repaint();
+                botonesGeneradores.get(i).revalidate();
             }else{
-                botonesMejoras.get(i).setBackground(COLOR_BOTON);
-                JLabel l = (JLabel) botonesMejoras.get(i).getComponent(0);
+                botonesGeneradores.get(i).setBackground(COLOR_BOTON);
+                JLabel l = (JLabel) botonesGeneradores.get(i).getComponent(0);
                 l.setForeground(Color.WHITE);
-                botonesMejoras.get(i).repaint();
-                botonesMejoras.get(i).revalidate();
+                botonesGeneradores.get(i).repaint();
+                botonesGeneradores.get(i).revalidate();
                 }
         }
+
+        for (int j= 0; j < mejoras.size(); j++){
+            botonesMejoras.get(j).repaint();
+            botonesMejoras.get(j).revalidate();
+            spMejoras.repaint();
+            spMejoras.revalidate();
+            pMejoras.repaint();
+            pMejoras.revalidate();
+
+            if(dineroTotal < mejoras.get(j).getPrecio()) {
+                botonesMejoras.get(j).setBackground(COLOR_BOTON_HOVER);
+                JLabel l = (JLabel) botonesMejoras.get(j).getComponent(0);
+                l.setForeground(Color.LIGHT_GRAY);
+                botonesMejoras.get(j).repaint();
+                botonesMejoras.get(j).revalidate();
+            } else {
+                botonesMejoras.get(j).setBackground(COLOR_BOTON);
+                JLabel l = (JLabel) botonesMejoras.get(j).getComponent(0);
+                l.setForeground(Color.WHITE);
+                botonesMejoras.get(j).repaint();
+                botonesMejoras.get(j).revalidate();
+            }
+        }
+
         return dinero;
     }
 }

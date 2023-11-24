@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6213075f-4993-452a-9a00-2cb48a8ae3c1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/Generadores/Altar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Generadores/Aprendiz.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Generadores/Palantir.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Generadores/Portal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Generadores/Ritual.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Generadores/TorreMago.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Generadores/Varita.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/xml/EscribirXML.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/xml/LeerXML.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/Mejora.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/GUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Generador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Generador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Generadores/Puntero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Generadores/Puntero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Generadores/Runas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Generadores/Runa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ButtonRenderer.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
