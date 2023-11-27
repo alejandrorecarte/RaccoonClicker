@@ -69,7 +69,7 @@ public class GUI {
         pMapache = new JPanel();
         pMapache.setBackground(COLOR_BOTON);
         pMapache.setBorder(new LineBorder(COLOR_BOTON_HOVER,2));
-        bMapache.setIcon(new ImageIcon("src/mapacheMago-icon.png"));
+        bMapache.setIcon(new ImageIcon("src/view/icons/raccoon_icon.png"));
 
         pMapache.add(bMapache);
 
@@ -87,15 +87,6 @@ public class GUI {
         generadores.add(new Altar());
         generadores.add(new Portal());
         generadores.add(new TorreMago());
-        generadores.add(new Puntero());
-        generadores.add(new Puntero());
-        generadores.add(new Puntero());
-        generadores.add(new Puntero());
-        generadores.add(new Puntero());
-        generadores.add(new Puntero());
-        generadores.add(new Puntero());
-        generadores.add(new Puntero());
-        generadores.add(new Puntero());
 
         pGeneradores = new JPanel(new GridLayout(18,0));
         pGeneradores.setBackground(COLOR_PRINCIPAL);

@@ -10,14 +10,33 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import static controller.xml.EscribirXML.escribirXML;
+import static controller.xml.LeerXML.*;
 
 public class GUIController extends GUI {
 
-    private long dineroTotal = 50000;
+    private long dineroTotal;
     private boolean parar = false;
 
     public GUIController() {
+        dineroTotal = leerDineroTotalXML();
+
+        generadores = leerGeneradoresXML(generadores);
+
+        mejorasComprados = leerMejorasXML(mejoras);
+
+        for(int i = 0; i < mejoras.size(); i++) {
+            for (int j = 0; j < mejorasComprados.size(); j++) {
+                System.out.println(mejorasComprados.get(j).getNombre());
+                botonesMejorasComprados.add(botonesMejoras.get(i));
+                botonesMejoras.remove(botonesMejorasComprados.get(j));
+                mejoras.remove(mejorasComprados.get(j));
+            }
+            pMejoras.setLayout(new GridLayout(mejorasComprados.size(), 1));
+        }
+
         for(int i = 0; i < botonesGeneradores.size(); i++) {
+            JLabel l = (JLabel) botonesGeneradores.get(i).getComponents()[0];
+            l.setText(generadores.get(i).getText());
             int finalI = i;
             botonesGeneradores.get(i).addMouseListener(new MouseAdapter() {
                 @Override
@@ -78,7 +97,7 @@ public class GUIController extends GUI {
     }
 
     public void cambiarDeColorMapache(){
-        pMapache.setBackground(COLOR_BOTON_HOVER);
+        bMapache.setIcon(new ImageIcon("src/view/icons/raccoon_icon_pressed.png"));
 
         SwingUtilities.invokeLater(() -> {
             try {
@@ -86,7 +105,7 @@ public class GUIController extends GUI {
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
-            pMapache.setBackground(COLOR_BOTON);
+            bMapache.setIcon(new ImageIcon("src/view/icons/raccoon_icon.png"));
         });
     }
 
